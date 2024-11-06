@@ -9,19 +9,21 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+
       title: 'boot_movil',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        scaffoldBackgroundColor: const Color(0xFFEDF2F6),
         useMaterial3: true,
       ),
       initialRoute: '/login', // Ruta inicial
       routes: {
         '/login': (context) =>  const LoginPage(), // Define la ruta '/login'
-        '/home': (context) =>  HomePage(), // Define la ruta '/home'
+        '/home': (context) =>  const HomePage(), // Define la ruta '/home'
       },
     );
   }

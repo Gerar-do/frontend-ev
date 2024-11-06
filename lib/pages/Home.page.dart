@@ -1,3 +1,4 @@
+import 'package:demo_integrador/widgets/home_app_bar.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -6,10 +7,23 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+    appBar: const PreferredSize(
+        preferredSize:  Size.fromHeight(90.0),
+        child: HomeAppBar(),
+      ),
+      body: SafeArea(
+          child:
+          Padding(
+              padding: const EdgeInsets.symmetric(vertical: 30),
+            child: Column(
+              children: [
+                Expanded(child: Container(
 
-      body: Container(
-        color: const Color(0xFFF2F3FA), // Color de fondo especificado
-        // El cuerpo ahora está vacío
+                )
+                ),
+              ],
+            ),
+          )
       ),
     );
   }
