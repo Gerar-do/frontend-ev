@@ -1,7 +1,37 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
+
+  @override
+  _LoginPageState createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    // Asegurarse de que la orientación sea bloqueada después de que la página se cargue
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      SystemChrome.setPreferredOrientations([
+        DeviceOrientation.portraitUp, // Solo permite la orientación vertical
+      ]);
+    });
+  }
+
+  @override
+  void dispose() {
+    // Restaura las orientaciones cuando se salga de la página de login
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.landscapeRight,
+    ]);
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,19 +55,25 @@ class LoginPage extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center, // Centra el contenido verticalmente
               children: [
+                // Reemplaza el CircleAvatar por tu logo
                 CircleAvatar(
-                  radius: 40,
-                  backgroundColor: Colors.grey[300],
-                  child: const Icon(Icons.add, size: 40, color: Colors.black),
+                  radius: 40, // Tamaño del círculo del logo
+                  backgroundColor: Colors.transparent, // Fondo transparente
+                  child: Image.asset(
+                    'assets/logo.png', // Ruta de la imagen del logo
+                    width: 300,
+                    height: 300,
+                    fit: BoxFit.contain,
+                  ),
                 ),
                 const SizedBox(height: 12),
                 const Text(
                   'Inicia',
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 ),
                 const Text(
                   'Sesión',
-                  style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 20), // Ajusta este espacio según sea necesario
 
@@ -79,7 +115,7 @@ class LoginPage extends StatelessWidget {
                       ElevatedButton(
                         onPressed: () {
                           // Navegar a la vista de inicio
-                          Navigator.pushNamed(context, '/home');
+                          Navigator.pushReplacementNamed(context, '/home');
                         },
                         style: ElevatedButton.styleFrom(
                           padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
